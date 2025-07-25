@@ -1,0 +1,23 @@
+# docker-compose.yml
+
+
+services:
+  web:
+    image: nginx:alpine
+    container_name: nginxwebsvr
+    ports:
+      - "80:80"
+    environment:
+      WEB_USERNAME: admin
+      WEB_PASSWORD: "2301845@SIT.singaporetech.edu.sg"
+
+  git-server:
+    build:
+      context: .
+      dockerfile: gitserver.Dockerfile
+    container_name: git-server
+    restart: always
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./repos:/var/www/git
